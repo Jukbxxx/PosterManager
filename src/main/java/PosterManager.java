@@ -2,13 +2,8 @@ public class PosterManager {
     private FilmItem[] films = new FilmItem[0]; //поле для массива фильмов
     private int filmsAmount = 5; //поле для лимита по выводу последних добавленных фильмов
 
-    public PosterManager(FilmItem[] films, int filmsAmount) {
-        this.films = films;
+    public PosterManager(int filmsAmount) {
         this.filmsAmount = filmsAmount;
-    }
-
-    public PosterManager(FilmItem[] films) {
-        this.films = films;
     }
 
     public PosterManager() {
@@ -24,14 +19,21 @@ public class PosterManager {
         films = tmp;
     }
 
+
     public FilmItem[] findAll() {
         return films;
     }
 
     public FilmItem[] findLast() {
         FilmItem[] films = findAll();
-        FilmItem[] reversed = new FilmItem[filmsAmount];
-        for (int i = 0; i < filmsAmount; i++) {
+        int resultLength;
+        if (films.length >= filmsAmount) {
+            resultLength = filmsAmount;
+        } else {
+            resultLength = films.length;
+        }
+        FilmItem[] reversed = new FilmItem[resultLength];
+        for (int i = 0; i < resultLength; i++) {
             reversed[i] = films[films.length - 1 - i];
         }
         return reversed;
